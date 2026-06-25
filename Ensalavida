@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EnsalaVida - Viandas y Ensaladas Saludables</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Fredoka:wght@600;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --verde-natural: #4CAF50;
+            --verde-suave: #8BC34A;
+            --verde-lechuga: #E8F5E9;
+            --blanco: #FFFFFF;
+            --oscuro: #2E7D32;
+            --texto: #333333;
+            --gris-claro: #F9F9F9;
+            --aguacate: #C5E1A5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            color: var(--texto);
+            background-color: var(--blanco);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Bree Serif', serif;
+        }
+
+        /* --- HEADER & NAV --- */
+        header {
+            background-color: var(--oscuro);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Fredoka', sans-serif; /* Fuente tipo globo */
+            font-size: 32px;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-ensala {
+            color: var(--verde-suave);
+        }
+
+        .logo-vida {
+            color: var(--blanco);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: var(--blanco);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+            font-size: 16px;
+        }
+
+        .nav-menu a:hover {
+            color: var(--verde-suave);
+        }
+
+        .btn-header {
+            background-color: var(--verde-suave);
+            color: var(--blanco) !important;
+            padding: 10px 20px;
+            border-radius: 50px;
+            transition: background 0.3s, transform 0.2s !important;
+        }
+
+        .btn-header:hover {
+            background-color: var(--verde-natural);
+            transform: scale(1.05);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            margin-top: 70px;
+            background: linear-gradient(rgba(232, 245, 233, 0.85), rgba(232, 245, 233, 0.7)), 
+                        url('https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            padding: 120px 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            color: var(--oscuro);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #555;
+            margin-bottom: 35px;
+            font-weight: 600;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 14px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .btn-primary {
+            background-color: var(--verde-natural);
+            color: var(--blanco);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--oscuro);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: #25D366; /* Color verde de WhatsApp */
+            color: var(--blanco);
+            border: 2px solid #25D366;
+        }
+
+        .btn-secondary:hover {
+            background-color: #128C7E;
+            border-color: #128C7E;
+            transform: translateY(-2px);
+        }
+
+        /* --- SECCIONES COMUNES --- */
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            color: var(--oscuro);
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '🥗';
+            display: block;
+            font-size: 24px;
+            margin-top: 10px;
+        }
+
+        /* --- CATALOGO --- */
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--blanco);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(76, 175, 80, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(46, 125, 50, 0.15);
+        }
+
+        .card-img {
+            height: 240px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-title {
+            font-size: 22px;
+            color: var(--oscuro);
+            margin-bottom: 10px;
+        }
+
+        .card-ingredients {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: center; /* Centrado ya que no hay precio */
+            margin-top: auto;
+        }
+
+        .btn-add {
+            background-color: var(--verde-lechuga);
+            color: var(--oscuro);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Quicksand', sans-serif;
+            width: 100%; /* Botón completo y más llamativo */
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .btn-add:hover {
+            background-color: var(--verde-natural);
+            color: var(--blanco);
+        }
+
+        /* --- CARACTERISTICAS (¿POR QUÉ ELEGIRNOS?) --- */
+        .features-bg {
+            background-color: var(--gris-claro);
+            background-image: radial-gradient(var(--aguacate) 0.5px, transparent 0.5px), radial-gradient(var(--aguacate) 0.5px, var(--gris-claro) 0.5px);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            max-width: 100%;
+        }
+
+        .features-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .feature-item {
+            background: var(--blanco);
+            padding: 40px 20px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.02);
+            border-bottom: 4px solid var(--verde-suave);
+        }
+
+        .feature-icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .feature-item h3 {
+            color: var(--oscuro);
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        /* --- TESTIMONIOS --- */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background-color: var(--verde-lechuga);
+            padding: 30px;
+            border-radius: 20px;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+        }
+
+        .stars {
+            color: #FFC107;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--oscuro);
+            color: var(--blanco);
+            padding: 60px 20px 20px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-info {
+            max-width: 500px;
+        }
+
+        .footer-info h3 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        .social-icons a {
+            background: rgba(255,255,255,0.1);
+            color: var(--blanco);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 22px;
+            transition: all 0.3s;
+        }
+
+        .social-icons a.instagram-btn:hover {
+            background: #E1306C; /* Color Instagram */
+            transform: scale(1.1);
+        }
+
+        .social-icons a.whatsapp-btn:hover {
+            background: #25D366; /* Color WhatsApp */
+            transform: scale(1.1);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+            color: var(--aguacate);
+        }
+
+        /* --- RESPONSIVE MOBILES --- */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            .hero h1 {
+                font-size: 32px;
+            }
+            .hero p {
+                font-size: 16px;
+            }
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+            }
+            section {
+                padding: 60px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="#inicio" class="logo"><span class="logo-ensala">Ensala</span><span class="logo-vida">Vida</span></a>
+            <ul class="nav-menu">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#catalogo">Catálogo</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="https://wa.me/5493704833872?text=%C2%A1Hola%20Ensalavida!%20Quiero%20una%20ensalada%F0%9F%98%8B" target="_blank" class="btn-header">Hacer pedido</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>Comer saludable nunca fue tan rico</h1>
+            <p>Viandas y ensaladas frescas preparadas con ingredientes seleccionados y listas para disfrutar.</p>
+            <div class="hero-buttons">
+                <a href="#catalogo" class="btn-primary">Ver catálogo</a>
+                <a href="https://wa.me/5493704833872?text=%C2%A1Hola%20Ensalavida!%20Quiero%20una%20ensalada%F0%9F%98%8B" target="_blank" class="btn-secondary"><i class="fab fa-whatsapp"></i> Pedir ahora</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="catalogo">
+        <h2 class="section-title">Nuestro Catálogo</h2>
+        <div class="catalog-grid">
+            
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1550304943-4f24f54ddde9?auto=format&fit=crop&w=600&q=80" alt="Ensalada Caesar" class="card-img">
+                <div class="card-content">
+                    <h3 class="card-title">Ensalada Caesar</h3>
+                    <p class="card-ingredients">Lechuga, pollo grillado, queso parmesano, croutons y un delicioso aderezo Caesar artesanal.</p>
+                    <div class="card-footer">
+                        <a href="https://wa.me/5493704833872?text=%C2%A1Hola%20Ensalavida!%20Quiero%20una%20ensalada%20Caesar%F0%9F%98%8B" target="_blank" class="btn-add">Agregar pedido</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80" alt="Ensalada Palta" class="card-img">
+                <div class="card-content">
+                    <h3 class="card-title">Ensalada Palta</h3>
+                    <p class="card-ingredients">Palta cremosa, tomate cherry, mix de lechuga fresca, huevo cocido y dados de pollo jugoso.</p>
+                    <div class="card-footer">
+                        <a href="https://wa.me/5493704833872?text=%C2%A1Hola%20Ensalavida!%20Quiero%20una%20ensalada%20de%20Palta%F0%9F%98%8B" target="_blank" class="btn-add">Agregar pedido</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80" alt="Ensalada Mediterránea" class="card-img">
+                <div class="card-content">
+                    <h3 class="card-title">Ensalada Mediterránea</h3>
+                    <p class="card-ingredients">Aceitunas negras, dados de queso fresco, tomates jugosos y un mix verde de estación.</p>
+                    <div class="card-footer">
+                        <a href="https://wa.me/5493704833872?text=%C2%A1Hola%20Ensalavida!%20Quiero%20una%20ensalada%20Mediterr%C3%A1nea%F0%9F%98%8B" target="_blank" class="btn-add">Agregar pedido</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80" alt="Ensalada Proteica" class="card-img">
+                <div class="card-content">
+                    <h3 class="card-title">Ensalada Proteica</h3>
+                    <p class="card-ingredients">Pollo desmenuzado, huevo, atún al natural y una base crujiente de vegetales frescos.</p>
+                    <div class="card-footer">
+                        <a href="https://wa.me/5493704833872?text=%C2%A1Hola%20Ensalavida!%20Quiero%20una%20ensalada%20Proteica%F0%9F%98%8B" target="_blank" class="btn-add">Agregar pedido</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1572449043416-55f4685c9bb7?auto=format&fit=crop&w=600&q=80" alt="Ensalada Veggie" class="card-img">
+                <div class="card-content">
+                    <h3 class="card-title">Ensalada Veggie</h3>
+                    <p class="card-ingredients">Zanahoria rallada, maíz dulce, tomate cherry fresco y un abundante mix de hojas verdes de huerta.</p>
+                    <div class="card-footer">
+                        <a href="https://wa.me/5493704833872?text=%C2%A1Hola%20Ensalavida!%20Quiero%20una%20ensalada%20Veggie%F0%9F%98%8B" target="_blank" class="btn-add">Agregar pedido</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="features-bg" id="nosotros">
+        <section>
+            <h2 class="section-title">¿Por qué elegir EnsalaVida?</h2>
+            <div class="features-container">
+                <div class="feature-item">
+                    <span class="feature-icon">🥗</span>
+                    <h3>Ingredientes frescos</h3>
+                    <p>Directo del productor a tu mesa todos los días.</p>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🚚</span>
+                    <h3>Entregas rápidas</h3>
+                    <p>Tus viandas listas y frescas en la puerta de tu hogar o trabajo.</p>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">💚</span>
+                    <h3>Opciones saludables</h3>
+                    <p>Menús diseñados para mantener tu bienestar en equilibrio.</p>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">⭐</span>
+                    <h3>Calidad garantizada</h3>
+                    <p>Elaboración artesanal bajo rigurosos estándares de higiene.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section>
+        <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">“Las mejores viandas que probé. Se nota el sabor casero y los vegetales están súper crocantes.”</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">“Ricas, abundantes y saludables. Ideales para resolver mis almuerzos en la oficina sin descuidarme.”</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-info">
+                <h3><span class="logo-ensala">Ensala</span><span class="logo-vida">Vida</span></h3>
+                <p>Tu rincón saludable de comida casera. Llenamos tus días de frescura y nutrición con el toque artesanal que te encanta.</p>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/ensalavida_?igsh=MTJscDZkZ3pva3d3Mg==" target="_blank" class="instagram-btn"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/5493704833872?text=%C2%A1Hola%20Ensalavida!%20Quiero%20una%20ensalada%F0%9F%98%8B" target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 EnsalaVida - Todos los derechos reservados. Hecho con 💚 para una vida mejor.
+        </div>
+    </footer>
+
+</body>
+</html>
